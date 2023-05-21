@@ -1,8 +1,8 @@
-from models.Bicycle import Bicycle
-from models.Car import Car
-from models.Tram import Tram
-from models.Trolleybus import Trolleybus
-from managers.TransportManager import TransportManager
+from models.bicycle import Bicycle
+from models.car import Car
+from models.tram import Tram
+from models.trolleybus import Trolleybus
+from managers.transport_manager import TransportManager
 
 if __name__ == '__main__':
     transport_manager = TransportManager()
