@@ -1,11 +1,29 @@
-from Trolleybus import Trolleybus
+from models.bicycle import Bicycle
+from models.car import Car
+from models.tram import Tram
+from models.trolleybus import Trolleybus
+from managers.transport_manager import TransportManager
 
 if __name__ == '__main__':
-    trolleybuses = [Trolleybus(),
-                    Trolleybus(122, "Sknylivok", 70.0, 50, 42),
-                    Trolleybus.get_instance(),
-                    Trolleybus.get_instance()]
+    transport_manager = TransportManager()
+    transport_manager.add_transport(Trolleybus(122, 65, 22, "Sknylivok", 50, 34))
+    transport_manager.add_transport(Trolleybus(564, 60, 38, "Kulparkiv", 60, 6))
+    transport_manager.add_transport(Car(2414, 200, 4, 300, 11))
+    transport_manager.add_transport(Car(5680, 250, 2, 450, 22))
+    transport_manager.add_transport(Tram(1178, 80, 1, 200))
+    transport_manager.add_transport(Tram(1166, 70, 4, 154))
+    transport_manager.add_transport(Bicycle(247, 40, "Kellys"))
+    transport_manager.add_transport(Bicycle(578, 50, "Merida"))
 
-    for trolleybus in trolleybuses:
-        print(trolleybus)
-        d = getattr(trolleybus, "max_speed")
+    for transport in transport_manager.transports:
+        print(transport)
+
+    transport_with_max_speed_higher_than = transport_manager.find_transport_with_max_speed_higher_than(60)
+    print("\nTransport with max speed higher than 60:")
+    for transport in transport_with_max_speed_higher_than:
+        print(transport)
+
+    transport_with_id = transport_manager.find_transport_by_id(564)
+    print("\nTransport with id 564:")
+    for transport in transport_with_id:
+        print(transport)
