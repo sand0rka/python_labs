@@ -1,6 +1,10 @@
+"""
+This is file with car model.
+"""
 from .transport import Transport
 
-
+# pylint: disable=line-too-long
+# pylint: disable=too-many-arguments
 class Car(Transport):
     """
     A class representing a car.
@@ -19,39 +23,46 @@ class Car(Transport):
         max_load: Get or set the maximum load capacity of the car in kilograms.
     """
 
-    def __init__(self, id, max_speed, door_count, trunk_volume, max_load):
-        super().__init__(id, max_speed)
-        self.__door_count = door_count
-        self.__trunk_volume = trunk_volume
-        self.__max_load = max_load
+    def __init__(self, transport_id, max_speed, door_count, trunk_volume, max_load):
+        """
+        Initialize a Car object with the provided parameters.
 
-    @property
-    def door_count(self):
-        return self.__door_count
+        Args:
+            id (int): The unique identifier for the car.
+            max_speed (float): The maximum speed of the car.
+            door_count (int): The number of doors on the car.
+            trunk_volume (float): The volume of the car's trunk in cubic units.
+            max_load (float): The maximum load capacity of the car in weight units.
 
-    @door_count.setter
-    def door_count(self, value):
-        self.__door_count = value
+        Returns:
+            None
+        """
 
-    @property
-    def trunk_volume(self):
-        return self.__trunk_volume
-
-    @trunk_volume.setter
-    def trunk_volume(self, value):
-        self.__trunk_volume = value
-
-    @property
-    def max_load(self):
-        return self.__max_load
-
-    @max_load.setter
-    def max_load(self, value):
-        self.__max_load = value
+        super().__init__(transport_id, max_speed)
+        self.door_count = door_count
+        self.trunk_volume = trunk_volume
+        self.max_load = max_load
 
     def __str__(self):
-        return f"Car(id={self.id}, max_speed={self.max_speed}, door_count={self.__door_count}, " \
-               f"trunk_volume={self.__trunk_volume}, max_load={self.__max_load})"
+        """
+            Return a string representation of the Car object.
+
+            Returns:
+                str: A string representing the Car object with its attributes.
+
+        """
+        return f"Car(id={self.transport_id}, max_speed={self.max_speed}, door_count={self.door_count}, " \
+               f"trunk_volume={self.trunk_volume}, max_load={self.max_load})"
 
     def accelerate(self, speed):
+        """
+        Accelerates the trolleybus to the specified speed.
+
+            Args:
+                speed (int): The speed to which the trolleybus will be accelerated.
+
+            Returns:
+                int: The actual speed the trolleybus has been accelerated to.
+
+        """
         return speed

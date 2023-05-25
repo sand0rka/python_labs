@@ -1,12 +1,15 @@
+"""
+This is file with transport model.
+"""
 from abc import ABC, abstractmethod
 
-
+# pylint: disable=too-few-public-methods
 class Transport(ABC):
     """
         Abstract base class representing a transport vehicle.
 
         Attributes:
-            id (int): Unique identifier of the transport vehicle. Default value is 0.
+            transport_id (int): Unique identifier of the transport vehicle. Default value is 0.
             max_speed (float): Maximum speed of the transport vehicle.
 
         Methods:
@@ -16,9 +19,19 @@ class Transport(ABC):
             id (int): Unique identifier of the transport vehicle. Default value is 0.
             max_speed (float): Maximum speed of the transport vehicle.
     """
-    @abstractmethod
-    def __init__(self, id=0, max_speed=0):
-        self.id = id
+
+    def __init__(self, transport_id=0, max_speed=0):
+        """
+        Initialize a Vehicle object with the provided parameters.
+
+        Args:
+            transport_id (int): The unique identifier for the vehicle. Defaults to 0.
+            max_speed (float): The maximum speed of the vehicle. Defaults to 0.0.
+
+        Returns:
+            None
+        """
+        self.transport_id = transport_id
         self.max_speed = max_speed
 
     @abstractmethod
@@ -29,4 +42,3 @@ class Transport(ABC):
             Args:
                 speed (float): Speed to which the transport vehicle should be accelerated.
         """
-        pass

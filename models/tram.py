@@ -1,3 +1,6 @@
+"""
+This is file with tram model.
+"""
 from .transport import Transport
 
 
@@ -6,8 +9,8 @@ class Tram(Transport):
     A class representing a tram.
 
     Attributes:
-        __route_number (int): Number of the tram's route.
-        __capacity (int): Capacity of the tram.
+        route_number (int): Number of the tram's route.
+        capacity (int): Capacity of the tram.
 
     Properties:
         route_number (int): Number of the tram's route.
@@ -18,30 +21,43 @@ class Tram(Transport):
 
     """
 
-    def __init__(self, id, max_speed, route_number, capacity):
-        super().__init__(id, max_speed)
-        self.__route_number = route_number
-        self.__capacity = capacity
+    def __init__(self, transport_id, max_speed, route_number, capacity):
+        """
+        Initialize a Bus object with the provided parameters.
 
-    @property
-    def route_number(self):
-        return self.__route_number
+        Args:
+            transport_id (int): The unique identifier for the bus.
+            max_speed (float): The maximum speed of the bus.
+            route_number (int): The number associated with the bus route.
+            capacity (int): The maximum number of passengers the bus can hold.
 
-    @route_number.setter
-    def route_number(self, value):
-        self.__route_number = value
-
-    @property
-    def capacity(self):
-        return self.__capacity
-
-    @capacity.setter
-    def capacity(self, value):
-        self.__capacity = value
+        Returns:
+            None
+        """
+        super().__init__(transport_id, max_speed)
+        self.route_number = route_number
+        self.capacity = capacity
 
     def accelerate(self, speed):
+        """
+        Accelerates the trolleybus to the specified speed.
+
+        Args:
+            speed (int): The speed to which the trolleybus will be accelerated.
+
+        Returns:
+            int: The actual speed the trolleybus has been accelerated to.
+
+        """
         return speed
 
     def __str__(self):
-        return f"Tram(id={self.id}, max_speed={self.max_speed}, "\
-                f"route_number={self.__route_number}, capacity={self.__capacity})"
+        """
+            Return a string representation of the Tram object.
+
+            Returns:
+                str: A string representing the Tram object with its attributes.
+
+            """
+        return f"Tram(id={self.transport_id}, max_speed={self.max_speed}, "\
+                f"route_number={self.route_number}, capacity={self.capacity})"
