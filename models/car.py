@@ -65,4 +65,5 @@ class Car(Transport):
                 int: The actual speed the trolleybus has been accelerated to.
 
         """
-        return speed
+        if speed <= self.max_speed:
+            return speed

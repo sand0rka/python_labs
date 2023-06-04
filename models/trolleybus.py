@@ -99,7 +99,7 @@ class Trolleybus(Transport):
         Write string for trolleybus.
         """
         return f"Trolleybus(id={self.transport_id}, max_speed={self.max_speed}, route_number={self.route_number}, " \
-               f"current_stop='{self.current_stop}',  capacity={self.capacity}, passengers={self.passengers})"
+               f"current_stop='{self.current_stop}', capacity={self.capacity}, passengers={self.passengers})"
 
     @staticmethod
     def get_instance():
@@ -129,4 +129,5 @@ class Trolleybus(Transport):
             int: The actual speed the trolleybus has been accelerated to.
 
         """
-        return speed
+        if speed <= self.max_speed:
+            return speed
