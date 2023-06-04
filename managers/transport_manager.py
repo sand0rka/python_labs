@@ -23,13 +23,65 @@ class TransportManager:
     """
     transports = []
 
+    def __init__(self):
+        """
+        Initializes a set_manager object.
+
+        """
+        self._current_index = 0
+
+    def __len__(self):
+        """
+        Get the number of transports in the transport manager.
+
+        Returns:
+            int: The number of transports.
+        """
+        return len(self.transports)
+
+    def __getitem__(self, index):
+        """
+        Get a transport object by index.
+
+        Args:
+            index (int): The index of the transport object.
+
+        Returns:
+            object: The transport object at the specified index.
+        """
+        return self.transports[index]
+
+    def __iter__(self):
+        """
+        Iterate over the transports in the transport manager.
+
+        Returns:
+            iterator: Iterator over the transports.
+        """
+        return self
+
+    def __next__(self):
+        """
+        Get the next transport object in the iteration.
+
+        Returns:
+            object: The next transport object.
+
+        Raises:
+            StopIteration: If there are no more transports to iterate over.
+        """
+        if self._current_index >= len(self.transports):
+            raise StopIteration
+        else:
+            transport = self.transports[self._current_index]
+            self._current_index += 1
+            return transport
+
     def add_transport(self, transport):
         """
         Add a transport object to the list of transports.
-
         Args:
             transport: The transport object to be added.
-
         Returns:
             None
         """
@@ -60,36 +112,6 @@ class TransportManager:
             list: A list of transport objects with a matching ID. If no transport is found, the list will be empty.
         """
         return [transport for transport in self.transports if transport.transport_id == transport_id]
-
-    def __len__(self):
-        """
-        Get the number of transports in the transport manager.
-
-        Returns:
-            int: The number of transports.
-        """
-        return len(self.transports)
-
-    def __getitem__(self, index):
-        """
-        Get a transport object by index.
-
-        Args:
-            index (int): The index of the transport object.
-
-        Returns:
-            object: The transport object at the specified index.
-        """
-        return self.transports[index]
-
-    def __iter__(self):
-        """
-        Iterate over the transports in the transport manager.
-
-        Returns:
-            iterator: Iterator over the transports.
-        """
-        return iter(self.transports)
 
     def get_list_of_accelerate(self):
         """

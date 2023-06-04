@@ -45,7 +45,7 @@ class SetManager:
         """
         length = 0
         for transport in self.regular_manager.transports:
-            length += len(transport.fuel_set)
+            length += len(transport)
         return length
 
     def __getitem__(self, index):
@@ -63,9 +63,7 @@ class SetManager:
 
         """
         for transport in self.regular_manager.transports:
-            if index < len(transport):
-                return transport[index]
-            index -= len(transport)
+            return transport[index]
         raise IndexError("Index out of range")
 
     def __next__(self):
@@ -79,10 +77,8 @@ class SetManager:
             StopIteration: If all fuel sets have been iterated over.
 
         """
-        self.current_index += 1
         if self.current_index >= len(self):
             raise StopIteration
         result = self[self.current_index]
         self.current_index += 1
         return result
-

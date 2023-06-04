@@ -65,7 +65,7 @@ def print_iterable_length(func):
         result = func(*args, **kwargs)
 
         if hasattr(result, "__iter__"):
-            length = sum(1 for _ in result)
+            length = len(result)
         else:
             length = 1
 

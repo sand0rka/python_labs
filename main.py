@@ -56,3 +56,6 @@ if __name__ == '__main__':
     print("\nIterating over transports:")
     for item in set_manager:
         print(item)
+    print("\n\n")
+    for item in set_manager:
+        print(item)
