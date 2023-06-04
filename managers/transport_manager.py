@@ -1,7 +1,8 @@
 """
 This is file with transport manager.
 """
-from decorators import log_parameters, print_iterable_length
+from decorators import print_iterable_length, logged
+from exceptions import TransportNotFoundException
 
 
 # pylint: disable=line-too-long
@@ -100,7 +101,7 @@ class TransportManager:
         """
         return [transport for transport in self.transports if transport.max_speed > max_speed]
 
-    @log_parameters
+    @logged(TransportNotFoundException, "console")
     def find_transport_by_id(self, transport_id):
         """
         Find a transport object by its ID.
@@ -111,7 +112,12 @@ class TransportManager:
         Returns:
             list: A list of transport objects with a matching ID. If no transport is found, the list will be empty.
         """
-        return [transport for transport in self.transports if transport.transport_id == transport_id]
+        matching_transports = [transport for transport in self.transports if transport.transport_id == transport_id]
+
+        if not matching_transports:
+            raise TransportNotFoundException
+
+        return matching_transports
 
     def get_list_of_accelerate(self):
         """

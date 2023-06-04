@@ -2,6 +2,8 @@
 This is file with tram model.
 """
 from .transport import Transport
+from decorators import logged
+from exceptions import SpeedExceededException
 
 
 class Tram(Transport):
@@ -38,6 +40,7 @@ class Tram(Transport):
         self.route_number = route_number
         self.capacity = capacity
 
+    @logged(SpeedExceededException, "file")
     def accelerate(self, speed):
         """
         Accelerates the trolleybus to the specified speed.
@@ -49,8 +52,10 @@ class Tram(Transport):
             int: The actual speed the trolleybus has been accelerated to.
 
         """
-        if speed <= self.max_speed:
-            return speed
+        if speed > self.max_speed:
+            raise SpeedExceededException()
+
+        return speed
 
     def __str__(self):
         """
@@ -60,5 +65,5 @@ class Tram(Transport):
                 str: A string representing the Tram object with its attributes.
 
             """
-        return f"Tram(id={self.transport_id}, max_speed={self.max_speed}, "\
-                f"route_number={self.route_number}, capacity={self.capacity})"
+        return f"Tram(id={self.transport_id}, max_speed={self.max_speed}, " \
+               f"route_number={self.route_number}, capacity={self.capacity})"
