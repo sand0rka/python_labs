@@ -77,8 +77,35 @@ def print_iterable_length(func):
 
 
 def logged(exception, mode):
+    """
+    A parameterized decorator that logs exceptions using the logging module based on the specified mode.
+
+    Args:
+        exception (Exception): The exception type to be caught and logged.
+        mode (str): The logging mode, either "console" or "file".
+
+    Returns:
+        function: The decorated function.
+
+    """
+
     def decorator(func):
         def wrapper(*args, **kwargs):
+            """
+            The wrapper function that wraps the original function and logs exceptions.
+
+            Args:
+                *args: Positional arguments passed to the wrapped function.
+                **kwargs: Keyword arguments passed to the wrapped function.
+
+            Returns:
+                Any: The return value of the wrapped function.
+
+            Raises:
+                Exception: The original exception raised by the wrapped function.
+
+            """
+
             try:
                 return func(*args, **kwargs)
             except exception as e:
