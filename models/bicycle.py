@@ -2,6 +2,9 @@
 This is file with bicycle model.
 """
 from .transport import Transport
+from decorators import logged
+from exceptions import SpeedExceededException
+
 
 # pylint: disable=line-too-long
 class Bicycle(Transport):
@@ -33,6 +36,7 @@ class Bicycle(Transport):
         super().__init__(transport_id, max_speed)
         self.bike_brand = bike_brand
 
+    @logged(SpeedExceededException, "file")
     def accelerate(self, speed):
         """Accelerates the trolleybus to the specified speed.
 
@@ -43,8 +47,10 @@ class Bicycle(Transport):
                 int: The actual speed the trolleybus has been accelerated to.
 
         """
-        if speed <= self.max_speed:
-            return speed
+        if speed > self.max_speed:
+            raise SpeedExceededException()
+
+        return speed
 
     def __str__(self):
         """

@@ -2,6 +2,9 @@
 This is file with trolleybus model.
 """
 from .transport import Transport
+from decorators import logged
+from exceptions import SpeedExceededException
+
 
 # pylint: disable=line-too-long
 # pylint: disable=too-many-arguments
@@ -40,7 +43,7 @@ class Trolleybus(Transport):
         Initialize a Bus object with the provided parameters.
 
         Args:
-            id (int): The unique identifier for the bus. Defaults to 100.
+            transport_id (int): The unique identifier for the bus. Defaults to 100.
             max_speed (float): The maximum speed of the bus. Defaults to 0.0.
             route_number (int): The number associated with the bus route.
             current_stop (str): The name of the current bus stop.
@@ -65,8 +68,8 @@ class Trolleybus(Transport):
             bool
         """
         return self.route_number == other.route_number and self.current_stop == other.current_stop and \
-                self.max_speed == other.max_speed and self.capacity == other.capacity and \
-                self.passengers == other.passengers
+            self.max_speed == other.max_speed and self.capacity == other.capacity and \
+            self.passengers == other.passengers
 
     def stop(self):
         """
@@ -118,6 +121,7 @@ class Trolleybus(Transport):
             Trolleybus.default_trolleybus = Trolleybus()
         return Trolleybus.default_trolleybus
 
+    @logged(SpeedExceededException, "file")
     def accelerate(self, speed):
         """
         Accelerates the trolleybus to the specified speed.
@@ -129,5 +133,7 @@ class Trolleybus(Transport):
             int: The actual speed the trolleybus has been accelerated to.
 
         """
-        if speed <= self.max_speed:
-            return speed
+        if speed > self.max_speed:
+            raise SpeedExceededException()
+
+        return speed

@@ -2,6 +2,9 @@
 This is file with car model.
 """
 from .transport import Transport
+from decorators import logged
+from exceptions import SpeedExceededException
+
 
 # pylint: disable=line-too-long
 # pylint: disable=too-many-arguments
@@ -10,9 +13,9 @@ class Car(Transport):
     A class representing a car.
 
     Attributes:
-        __door_count (int): number of doors in the car.
-        __trunk_volume (float): volume of the trunk in liters.
-        __max_load (float): maximum load capacity of the car in kilograms.
+        door_count (int): number of doors in the car.
+        trunk_volume (float): volume of the trunk in liters.
+        max_load (float): maximum load capacity of the car in kilograms.
 
     Methods:
         accelerate(self, speed): Accelerates the car to the specified speed.
@@ -54,6 +57,7 @@ class Car(Transport):
         return f"Car(id={self.transport_id}, max_speed={self.max_speed}, door_count={self.door_count}, " \
                f"trunk_volume={self.trunk_volume}, max_load={self.max_load})"
 
+    @logged(SpeedExceededException, "file")
     def accelerate(self, speed):
         """
         Accelerates the trolleybus to the specified speed.
@@ -65,5 +69,7 @@ class Car(Transport):
                 int: The actual speed the trolleybus has been accelerated to.
 
         """
-        if speed <= self.max_speed:
-            return speed
+        if speed > self.max_speed:
+            raise SpeedExceededException()
+
+        return speed
